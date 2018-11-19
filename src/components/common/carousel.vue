@@ -1,0 +1,136 @@
+<template>
+  <div class="carousel-container">
+    <div class="carousel-wrap" ref="carouselWrap">
+      <div class="carousel-item" v-for="(item, index) in items" :key="index">
+        <a href="" :style="'background-image: url(' + item.pic + ');'">
+          <p class="carousel-item-p">
+            <span class="carousel-item-span">{{ item.title }}</span>
+          </p>
+        </a>
+      </div>
+      <!-- <div class="carousel-item">
+2
+      </div>
+            <div class="carousel-item">
+3
+      </div>
+            <div class="carousel-item">
+4
+      </div>
+            <div class="carousel-item">
+5
+      </div> -->
+    </div>
+    <div class="carousel-progress"></div>
+  </div>
+</template>
+
+<script>
+import link from '@/mock/recommend'
+import { clearInterval } from 'timers';
+export default {
+  mounted () {
+    console.log(this.$refs.carouselWrap)
+    this.items = link.links
+    this.$refs.carouselWrap.style.width = 440 * Object.keys(this.items).length + 'px'
+    // debugger
+    this.startInterval()
+    this.$refs.carouselWrap.onmouseenter = () => {
+      this.clearIntervalFun()
+    }
+    this.$refs.carouselWrap.onmouseleave = () => {
+      this.startInterval()
+    }
+  },
+  data () {
+    return {
+      count: 0,
+      interval: null,
+      items: Object
+    }
+  },
+  methods: {
+    nextPic () {
+      if (this.count === Object.keys(this.items).length - 1) {
+        this.count = 0
+      } else {
+        this.count ++
+      }
+      if (this.$refs.carouselWrap) {
+        this.$refs.carouselWrap.style.marginLeft = -440 * this.count + 'px'
+      }
+    },
+    prePic () {
+      if (this.count === 0) {
+        this.count = Object.keys(this.items).length - 1
+      } else {
+        this.count --
+      }
+      if (this.$refs.carouselWrap) {
+        this.$refs.carouselWrap.style.marginLeft = -440 * this.count + 'px'
+      }
+    },
+    startInterval() {
+      if (Object.keys(this.items).length > 0) {
+        //轮播图定时滚动
+        this.interval = setInterval(() => {
+          this.nextPic()
+        }, 5000)
+      }
+    },
+    clearIntervalFun () {
+      if (this.interval) {
+        window.clearInterval(this.interval)
+      }
+    }
+  }
+}
+</script>
+
+<style lang="stylus" scoped>
+  .carousel-container
+    width 442px
+    height 226px
+    position relative
+    border 2px solid #000
+    box-sizing border-box
+    border-radius 4px
+    background-color red
+    float left
+    overflow hidden
+    box-sizing border-box
+    .carousel-wrap
+      height 100%
+      transition .2s
+      .carousel-item
+        width 440px
+        height 224px
+        float left
+      a
+        display block
+        width 100%
+        height 100%
+        position relative
+        .carousel-item-p
+          line-height 36px
+          height 36px
+          position absolute
+          bottom 0
+          left 0
+          right 0
+          background linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.8))
+          text-align left
+          font-size 14px
+          .carousel-item-span
+            color #fff
+            display block
+            width 310px
+            height 36px
+            line-height 36px
+            margin-left 10px
+            // 强制不换行
+            white-space nowrap
+            // 配合overflow使用，超出部分用省略号代替
+            text-overflow ellipsis
+            overflow hidden
+</style>
