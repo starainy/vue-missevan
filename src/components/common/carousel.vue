@@ -3,25 +3,20 @@
     <div class="carousel-wrap" ref="carouselWrap">
       <div class="carousel-item" v-for="(item, index) in items" :key="index">
         <a href="" :style="'background-image: url(' + item.pic + ');'">
-          <p class="carousel-item-p">
+          <span class="carousel-item-p">
             <span class="carousel-item-span">{{ item.title }}</span>
-          </p>
+          </span>
         </a>
       </div>
-      <!-- <div class="carousel-item">
-2
-      </div>
-            <div class="carousel-item">
-3
-      </div>
-            <div class="carousel-item">
-4
-      </div>
-            <div class="carousel-item">
-5
-      </div> -->
     </div>
-    <div class="carousel-progress"></div>
+    <ul class="carousel-progress">
+      <li
+        class="carousel-progress-item"
+        :class="{'carousel-progress-item-active': index === picIndex}"
+        @click="changeProgress(index)"
+        v-for="(progress, index) in count"
+        :key="progress"></li>
+    </ul>
   </div>
 </template>
 
@@ -32,7 +27,8 @@ export default {
   mounted () {
     console.log(this.$refs.carouselWrap)
     this.items = link.links
-    this.$refs.carouselWrap.style.width = 440 * Object.keys(this.items).length + 'px'
+    this.count = Object.keys(this.items).length
+    this.$refs.carouselWrap.style.width = 440 * this.count + 'px'
     // debugger
     this.startInterval()
     this.$refs.carouselWrap.onmouseenter = () => {
@@ -44,34 +40,41 @@ export default {
   },
   data () {
     return {
+      // 轮播图索引
+      picIndex: 0,
+      // items内对象的个数
       count: 0,
       interval: null,
       items: Object
     }
   },
+  watch: {
+    picIndex (value) {
+      if (this.$refs.carouselWrap) {
+        this.$refs.carouselWrap.style.marginLeft = -440 * this.picIndex + 'px'
+      }
+    }
+  },
   methods: {
     nextPic () {
-      if (this.count === Object.keys(this.items).length - 1) {
-        this.count = 0
+      if (this.picIndex === this.count - 1) {
+        this.picIndex = 0
       } else {
-        this.count ++
-      }
-      if (this.$refs.carouselWrap) {
-        this.$refs.carouselWrap.style.marginLeft = -440 * this.count + 'px'
+        this.picIndex ++
       }
     },
     prePic () {
-      if (this.count === 0) {
-        this.count = Object.keys(this.items).length - 1
+      if (this.picIndex === 0) {
+        this.picIndex = this.count - 1
       } else {
-        this.count --
+        this.picIndex --
       }
-      if (this.$refs.carouselWrap) {
-        this.$refs.carouselWrap.style.marginLeft = -440 * this.count + 'px'
-      }
+      // if (this.$refs.carouselWrap) {
+      //   this.$refs.carouselWrap.style.marginLeft = -440 * this.picIndex + 'px'
+      // }
     },
     startInterval() {
-      if (Object.keys(this.items).length > 0) {
+      if (this.count > 0) {
         //轮播图定时滚动
         this.interval = setInterval(() => {
           this.nextPic()
@@ -82,6 +85,11 @@ export default {
       if (this.interval) {
         window.clearInterval(this.interval)
       }
+    },
+    changeProgress (index) {
+      this.picIndex = index
+      this.clearIntervalFun()
+      this.startInterval()
     }
   }
 }
@@ -133,4 +141,30 @@ export default {
             // 配合overflow使用，超出部分用省略号代替
             text-overflow ellipsis
             overflow hidden
+            &:hover
+              text-shadow 0 0 3px #fff
+    .carousel-progress
+      height 16px
+      line-height 16px
+      position absolute
+      right 10px
+      bottom 10px
+      // &:after
+      //   clear both
+      .carousel-progress-item
+        display inline-block
+        width 10px
+        height 10px
+        margin-left 6px
+        margin-top 6px
+        background-color #fff
+        border-radius 50%
+        box-shadow 0 0 3px #000
+        // li与span类似，若两个相同标签之间有换行符，则会有间隙存在
+        float left
+        cursor pointer
+      .carousel-progress-item-active
+        border 2px solid #fff
+        background-color #c62828
+        margin-top 4px
 </style>

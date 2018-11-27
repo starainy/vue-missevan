@@ -13,6 +13,7 @@ export default {
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  /* font-family: 'Helvetica Neue','Hiragino Sans GB','Microsoft Yahei','Sans-serif','Verdana'; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
