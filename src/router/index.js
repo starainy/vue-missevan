@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
 import index from '@/components/index'
 import carousel from '@/components/common/carousel'
+import video from '@/components/common/videoItem'
 
 Vue.use(Router)
 
@@ -17,6 +17,11 @@ export default new Router({
       path: '/carousel',
       name: '轮播图',
       component: carousel
+    },
+    {
+      path: '/video',
+      name: '视频card',
+      component: video
     }
   ]
 })

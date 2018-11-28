@@ -1,7 +1,7 @@
 {
   "name": "vue-missevan",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "A personal project that mimics the M station (missevan) homepage",
   "author": "starainy <525662986@qq.com>",
   "private": true,
   "scripts": {
