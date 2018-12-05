@@ -25,7 +25,6 @@ import link from '@/mock/recommend'
 import { clearInterval } from 'timers';
 export default {
   mounted () {
-    console.log(this.$refs.carouselWrap)
     this.items = link.links
     this.count = Object.keys(this.items).length
     this.$refs.carouselWrap.style.width = 440 * this.count + 'px'
@@ -98,12 +97,12 @@ export default {
 <style lang="stylus" scoped>
   .carousel-container
     width 442px
-    height 226px
+    height 224px
     position relative
     border 2px solid #000
     box-sizing border-box
     border-radius 4px
-    background-color red
+    // background-color red
     float left
     overflow hidden
     box-sizing border-box
@@ -112,7 +111,7 @@ export default {
       transition .2s
       .carousel-item
         width 440px
-        height 224px
+        height 220px
         float left
       a
         display block

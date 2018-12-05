@@ -1,18 +1,28 @@
 <template>
-  <div>
-    <div class="bigcard-wrapper card-basic">
-      <a href="">
+  <div style="overflow: hidden; display: inline-block;">
+    <div class="bigcard-wrapper card-basic" v-if="videoType">
+      <a href="" title="【有声漫】一禅小和尚第五期二喜与大春">
         <div class="bigcard-img">
           <img src="//static.missevan.com/coversmini/201811/22/b2125b2837b4bf66e558d5a51d30c87a122952.jpg?x-oss-process=style/webp" alt="">
           <div class="video-time">2:00</div>
         </div>
       </a>
       <div class="video-title">
-        <a href="">声优名作演绎《心》【1-2】宫野真守；速水奖；石田彰等</a>
+        <a href="">【有声漫】一禅小和尚第五期二喜与大春</a>
       </div>
       <div class="video-info">
         <div class="video-info-broadcast">1.2万</div>
         <div class="video-info-comment">191</div>
+      </div>
+    </div>
+    <div class="smallcard-wrapper card-basic" v-else>
+      <a href="" title="【有声漫】一禅小和尚第五期二喜与大春">
+        <div class="smallcard-img">
+          <img src="//static.missevan.com/coversmini/201811/22/b2125b2837b4bf66e558d5a51d30c87a122952.jpg?x-oss-process=style/webp" alt="">
+        </div>
+      </a>
+      <div class="smallcard-video-title">
+        <a href="">【有声漫】一禅小和尚第五期二喜与大春</a>
       </div>
     </div>
   </div>
@@ -20,7 +30,12 @@
 
 <script>
 export default {
-
+  props: {
+    videoType: {
+      type: Boolean,
+      default: true
+    }
+  }
 }
 </script>
 
@@ -32,11 +47,11 @@ export default {
   overflow hidden
   float left
   position relative
-  background-color #f3f3f3
 .bigcard-wrapper
-  margin 0 20px 20px 0
+  // margin 0 20px 20px 0
   width 154px
   height 224px
+  background-color #f3f3f3
   &:hover
     .bigcard-img
       .video-time
@@ -103,4 +118,26 @@ export default {
       background-size 555px 547px
       position absolute
       left 0
+.smallcard-wrapper
+  margin-right 15px
+  float left
+  width 90px
+  &:hover
+    .smallcard-video-title
+      a
+        color #f25d8e
+  .smallcard-img
+    overflow hidden
+    img
+      width 90px
+      height 90px
+      float left
+  .smallcard-video-title
+    width 90px
+    height 36px
+    line-height 18px
+    padding-top 4px
+    a
+      color #000
+      font-size 12px
 </style>
