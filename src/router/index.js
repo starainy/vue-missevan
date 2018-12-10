@@ -5,8 +5,14 @@ import carousel from '@/components/common/carousel'
 import video from '@/components/common/videoItem'
 import choose from '@/components/common/chooseItem'
 import leftContent from '@/components/contentBlock/leftContentBlock'
+import bell from '@/components/contentBlock/bell'
+import podcastItem from '@/components/common/podcastItem'
+import podcast from '@/components/contentBlock/podcast'
+import bellItem from '@/components/common/bellItem'
 import rating from '@/components/contentBlock/rating'
 import MsFooter from '@/components/common/MsFooter'
+import sound from '@/components/common/soundListItem'
+import soundList from '@/components/contentBlock/hotSoundList'
 
 Vue.use(Router)
 
@@ -46,6 +52,36 @@ export default new Router({
       path: '/MsFooter',
       name: '底部',
       component: MsFooter
+    },
+    {
+      path: '/sound',
+      name: '音单',
+      component: sound
+    },
+    {
+      path: '/soundlist',
+      name: '热门音单',
+      component: soundList
+    },
+    {
+      path: '/bell',
+      name: '铃声',
+      component: bell
+    },
+    {
+      path: '/bellItem',
+      name: '铃声组件',
+      component: bellItem
+    },
+    {
+      path: '/podcastItem',
+      name: '播主组件',
+      component: podcastItem
+    },
+    {
+      path: '/podcast',
+      name: '播主',
+      component: podcast
     }
   ]
 })

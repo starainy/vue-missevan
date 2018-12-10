@@ -3,19 +3,17 @@
     <div class="left-content-title-line">
       <div class="left-content-title">
         <span>
-          <a href="">配音</a>
+          <a href="">
+            {{ title }}
+          </a>
         </span>
       </div>
       <ul class="left-content-nav">
-        <li class="left-content-nav-item">中文配音</li>
-        <li class="left-content-nav-item">日文及其他</li>
-        <li class="left-content-nav-item">角色配音</li>
-        <li class="left-content-nav-item">声优录音</li>
-        <li class="left-content-nav-item">作品录音</li>
+        <li class="left-content-nav-item" v-for="navItem in navItems" :key="navItem">{{ navItem }}</li>
         <!-- <div style="clear: both;"></div> -->
       </ul>
-      <choose-item :choose-items="['更多']" style="float: right; margin-left: 10px;"></choose-item>
-      <choose-item :choose-items="['按小鱼干', '按时间']" style="float: right; margin-left: 10px;"></choose-item>
+      <choose-item v-for="(chooseItem, index) in chooseItems" :key="index" :choose-items="chooseItem" style="float: right; margin-left: 10px;"></choose-item>
+      <!-- <choose-item :choose-items="['按小鱼干', '按时间']" style="float: right; margin-left: 10px;"></choose-item> -->
     </div>
     <div class="left-content-container">
       <video-item v-for="n in 5" :video-type="true" class="video-item-margin" :key="n"></video-item>
@@ -27,6 +25,17 @@
 import chooseItem from '../common/chooseItem.vue'
 import videoItem from '../common/videoItem.vue'
 export default {
+  props: {
+    title: String,
+    navItems: {
+      type: Array,
+      required: false
+    },
+    chooseItems: {
+      type: Array,
+      required: false
+    }
+  },
   components: {
     chooseItem,
     videoItem
