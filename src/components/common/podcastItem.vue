@@ -1,5 +1,5 @@
 <template>
-  <div class="podcast-item-wrapper">
+  <div class="podcast-item-wrapper" id="podcastItemWrapper" @mouseenter="videoAutoPlay">
     <div class="podcast-item-des">小二郎在放牛<br/>【Count】头像音，再不过我就疯了！</div>
     <img src="//static.missevan.com/avatars/201409/28/8e95bcc806d0ee419c743e87c6dad160205256.png" alt="">
     <div class="podcast-item-username">
@@ -9,7 +9,57 @@
 </template>
 
 <script>
+import audioInfo from '@/helpers/audioInfo'
 export default {
+  data () {
+    return {
+      // media: null
+    }
+  },
+  methods: {
+    videoAutoPlay () {
+      // var media = new AudioContext()
+      // media.play()
+      // debugger
+      function request (url) {
+        return new Promise (resolve => {
+            let xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            // 这里需要设置xhr response的格式为arraybuffer
+            // 否则默认是二进制的文本格式
+            xhr.responseType = 'arraybuffer'
+            xhr.onreadystatechange = function () {
+                // 请求完成，并且成功
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    resolve(xhr.response)
+                }
+            }
+            xhr.send()
+        })
+      }
+      function play (context, decodeBuffer) {
+          // 调用resume恢复播放
+          context.resume()
+          let source = context.createBufferSource()
+          source.buffer = decodeBuffer
+          source.connect(context.destination)
+          source.start(0)
+      }
+
+      function playAudio (context, url) {
+          request(url).then((audioMedia) => {
+            context.decodeAudioData(audioMedia, decode => play(context, decode))
+          })
+      }
+
+      let context = new (window.AudioContext || window.webkitAudioContext)()
+      // 如果能够自动播放
+      if (audioInfo.autoplay) {
+          playAudio(context, 'http://static.missevan.com/MP3/201504/28/733399a15bd434a0bbf250676a464176165026.mp3')
+      }
+    },
+
+  },
 
 }
 </script>

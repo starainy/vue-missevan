@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/components/index'
 import carousel from '@/components/common/carousel'
+import search from '@/components/common/search'
 import video from '@/components/common/videoItem'
 import choose from '@/components/common/chooseItem'
 import leftContent from '@/components/contentBlock/leftContentBlock'
@@ -82,6 +83,11 @@ export default new Router({
       path: '/podcast',
       name: '播主',
       component: podcast
+    },
+    {
+      path: '/search',
+      name: '搜索框',
+      component: search
     }
   ]
 })

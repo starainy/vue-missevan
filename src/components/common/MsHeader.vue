@@ -21,6 +21,9 @@
       </ul>
       <ul class="header-operate">
         <li>
+          <search class="search-position"></search>
+        </li>
+        <li>
           <a href="">登录/注册</a>
         </li>
         <li class="contribute">
@@ -32,8 +35,11 @@
 </template>
 
 <script>
+import search from './search'
 export default {
-
+  components: {
+    search
+  }
 }
 </script>
 
@@ -53,6 +59,7 @@ export default {
       margin 0 auto
       transition width .5s ease
       height 40px
+      position relative
       // background-color #fff
       .header-nav, .header-operate
         height 40px
@@ -107,4 +114,9 @@ export default {
           background-color #cd3333
           a:hover
             color white
+        li
+          .search-position
+            position absolute
+            right 10px
+            top 150px
 </style>
