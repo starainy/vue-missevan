@@ -4,7 +4,7 @@
       热门播主
     </div>
     <div class="podcast-container">
-      <podcast-item v-for="n in 9" :key="n" :style="n % 3 == 0 ? 'margin: 0 0 13px 0;' : 'margin: 0 22px 13px 0;'"></podcast-item>
+      <podcast-item :id="'podcastItemWrapper' + n" v-for="n in 9" :key="n" :style="n % 3 == 0 ? 'margin: 0 0 13px 0;' : 'margin: 0 22px 13px 0;'"></podcast-item>
     </div>
   </div>
 </template>
