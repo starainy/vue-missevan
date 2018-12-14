@@ -43,6 +43,7 @@ import square from './contentBlock/square'
 import rating from './contentBlock/rating'
 import MsFooter from './common/MsFooter'
 import toTop from './common/toTop'
+
 export default {
   components: {
     MsHeader,

@@ -1,6 +1,6 @@
 # vue-missevan
 
-> 仿照M站(missevan)首页做的个人练手项目，计划前端使用`vue`，后端使用`koa2`，因为学校还有其他项目在做再加上后端还不怎么会，所以进度可能有些慢
+> 仿照M站(missevan)首页做的个人练手项目，计划使用`vue`做前端，使用`koa2`做中间层，目前前端已经大部分完成，后端catalog和cRank部分基本完成
 
 ## Build Setup
 
@@ -35,9 +35,9 @@ npm test
 ## catalog
 > 当首页初始化时会以以下形式获取json数据http://static.missevan.com/home/sounds/201811/17/catalog_1542419447.json
 >
->catalog后缀会携带时间戳，如1542419447转为时间是2018-11-17 09:50:47
+> catalog后缀会携带时间戳，如1542419447转为时间是2018-11-17 09:50:47
 >
->经研究发现M站的catalog每隔20分钟刷新一遍，也就是说，下一次刷新为2018-11-17 10:10:47，即1542420647
+> 经研究发现M站的catalog每隔20分钟刷新一遍，也就是说，下一次刷新为2018-11-17 10:10:47，即1542420647
 
 ### 各键值说明
 
@@ -79,7 +79,7 @@ point
 | classic | 是否是经典，用途未知 |
 | video | 视频，多为null，用途未知 |
 
-`time`与`point`结构相同，不过`ponit`的`classic`基本都是true,而`time`基本都是false
+`time` 与 `point` 结构相同，不过 `ponit` 的 `classic` 基本都是true,而 `time` 基本都是false
 
 ## cRank
 
@@ -87,7 +87,20 @@ point
 
 ## recommend
 
-> 待续......
+> 获取的地址类似于http://static.missevan.com/home/sounds/201811/17/recommend_5bef73d8def9e.json
+>
+> emmmmmm、我能力有限，不知道后缀是啥。所以这一块的url被我直接固定住了。对，就是上面那个。
+
+### 各键值说明
+
+| 键 | 说明 |
+| ------ | ------ |
+| albums | 热门音单 |
+| anchors | 热门播主 |
+| event | 频道推荐 |
+| links | 轮播图 |
+| seiyu | 未知 |
+| sounds | 人气推荐 |
 
 ## leaves
 
