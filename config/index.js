@@ -11,15 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        target: 'https://www.missevan.com',
-        // target: 'http://stock.stabunkow.site',
-        changeOrigin: true,
-        pathRewrite: {
-          // /v2将代表target/v2
-          '^/api': '/'
-        }
-      }
+      // '/api': {
+      //   target: 'https://www.missevan.com',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': '/'
+      //   }
+      // }
     },
 
     // Various Dev Server settings

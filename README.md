@@ -1,30 +1,22 @@
 # vue-missevan
 
-> 仿照M站(missevan)首页做的个人练手项目，计划使用`vue`做前端，使用`koa2`做中间层，目前前端已经大部分完成，后端catalog和cRank部分基本完成
+> 仿照M站(missevan)首页做的个人练手项目，计划使用`vue`做前端，使用`koa2`做中间层，目前基本已经完成，尚需完善
 
-## Build Setup
+## 项目启动
 
 ``` bash
-# install dependencies
+# cd vue-missevan-server，先在服务端开启api
+npm install
+
+# serve with hot reload at localhost:3000
+npm run dev
+
+# cd vue-missevan，再在前端运行
 npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
 # 关于 [M站](http://www.missevan.com) 首页的数据接口说明
@@ -83,7 +75,35 @@ point
 
 ## cRank
 
-> 待续......
+> 排行榜信息，与catalog类似，每日2:0:7更新(不固定，在几秒之间浮动)
+
+### 各键值说明
+
+#### level1
+| 键 | 说明 |
+| ------ | ------ |
+| catalogs | 分区排行 |
+| rings | 铃声排行 |
+
+#### level2
+
+catalogs
+
+| 键 | 说明 |
+| ------ | ------ |
+| id | 编号 |
+| name | 分区名字 |
+| day3 | 三日排行 |
+| day7 | 七日排行 |
+
+rings
+
+| 键 | 说明 |
+| ------ | ------ |
+| id | 编号 |
+| name | 铃声分区名字 |
+| icon | 铃声分区背景图 |
+| sounds | 歌曲信息 |
 
 ## recommend
 
@@ -104,4 +124,24 @@ point
 
 ## leaves
 
-> 待续......
+> 各版块下具体分类的内容
+>
+> [POST]http://www.missevan.com/sound/leaves
+>
+> [REQUIRE]cid
+>
+> [RETURN]Array
+
+## getTags
+
+> 铃声排行分类
+>
+> [POST]https://www.missevan.com/rings/getTags
+>
+> [REQUIRE]catalog
+>
+> [RETURN]Array
+
+# 项目演示
+
+![图片无法显示请去static下查看](https://github.com/starainy/vue-missevan/tree/master/static/missevan.gif)

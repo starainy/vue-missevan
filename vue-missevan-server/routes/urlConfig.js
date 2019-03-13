@@ -13,11 +13,11 @@ const catalogLeavesUrl = 'https://www.missevan.com/sound/leaves'
 function catalogUrlFun() {
     let
         timedate = new Date()
-        catalogTimeDateObj = timeparse.parseStampToObj(timedate.getTime())
+        catalogTimeDateObj = timeparse.parseStampToObj(timedate.getTime(), true)
 
         catalogBaseUrl = 'http://static.missevan.com/home/sounds/'
         catalogFullUrl = ''
-        
+
         catalogNowTime = Math.floor(timedate.getTime() / 1000)
         catalogCompareTime = Math.floor(new Date(timedate.toLocaleDateString() + ' 0:10:47').getTime() / 1000)
         catalogTimeDistance = catalogNowTime - catalogCompareTime
@@ -28,7 +28,7 @@ function catalogUrlFun() {
         catalogFullUrl = catalogBaseUrl + catalogTimeDateObj.yearNum + catalogTimeDateObj.monthNum + '/' + catalogTimeDateObj.dayNum + '/catalog_' + String(nearestUpdate) + '.json'
     } else {
         let yesterdayLastUpdate = timeparse.changeAppointedTime({ duration: 20, tyle: 'minute', timestamp: catalogCompareTime * 1000, handleType: 'subtraction' })
-        let yesterdayLastUpdateObj = timeparse.parseStampToObj(yesterdayLastUpdate)
+        let yesterdayLastUpdateObj = timeparse.parseStampToObj(yesterdayLastUpdate, true)
         catalogFullUrl = catalogBaseUrl + yesterdayLastUpdateObj.yearNum + yesterdayLastUpdateObj.monthNum + '/' + yesterdayLastUpdateObj.dayNum + '/catalog_' + String(yesterdayLastUpdate / 1000) + '.json'
     }
 
@@ -39,8 +39,8 @@ function catalogUrlFun() {
 function cRankUrlFun () {
     let
         timedate = new Date()
-        cRankTimeDateObj = timeparse.parseStampToObj(timedate.getTime())
-        
+        cRankTimeDateObj = timeparse.parseStampToObj(timedate.getTime(), true)
+
         // 保留分钟及以上的时间戳
         cRankCompareTime = Math.floor(new Date(timedate.toLocaleDateString() + ' 2:0:7').getTime() / 100000)
         cRankBaseUrl = 'http://static.missevan.com/home/sounds/' + cRankTimeDateObj.yearNum + cRankTimeDateObj.monthNum + '/' + cRankTimeDateObj.dayNum + '/cRank_'

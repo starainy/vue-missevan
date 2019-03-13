@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <li class="choose-item" :class="{ 'choose-item-active': selectItem === chooseItem }" v-for="chooseItem in chooseItems" :key="chooseItem" @click="selectItem = chooseItem">{{ chooseItem }}</li>
+    <li class="choose-item" :class="{ 'choose-item-active': selectItem === chooseItem }" v-for="chooseItem in chooseItems" :key="chooseItem" @click="chooseCallBack(chooseItem)">{{ chooseItem }}</li>
   </ul>
 </template>
 
@@ -20,6 +20,12 @@ export default {
   mounted () {
     if (this.chooseItems.length > 1) {
       this.selectItem = this.chooseItems[0] || ''
+    }
+  },
+  methods: {
+    chooseCallBack (chooseItem) {
+      this.selectItem = chooseItem
+      this.$emit('chooseItemCallBack', this.selectItem)
     }
   }
 }

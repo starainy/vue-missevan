@@ -3,12 +3,13 @@
     <MsHeader></MsHeader>
     <nav-content></nav-content>
     <div class="homepage-container">
-      <div class="carousel-more">
+      <div class="carousel-channel">
         <carousel></carousel>
-        <more></more>
+        <channel></channel>
       </div>
       <div style="overflow: hidden;">
-        <left-content style="margin: 20px 30px 0 0;" title="人气推荐" :chooseItems="[['三日', '本周', '本月']]"></left-content>
+        <!-- <left-content style="margin: 20px 30px 0 0;" title="人气推荐" :chooseItems="[['三日', '本周', '本月']]"></left-content> -->
+        <hot-recommend style="margin: 20px 30px 0 0;" title="人气推荐"></hot-recommend>
         <square style="margin-top: 20px;"></square>
       </div>
       <div style="overflow: hidden;">
@@ -16,12 +17,12 @@
         <hot-activity style="margin-top: 50px;"></hot-activity>
       </div>
       <div style="overflow: hidden;">
-        <bell style="margin: 50px 30px 0 0;"></bell>
+        <bell style="margin: 50px 30px 0 0;" v-if="catalogRings.length"></bell>
         <podcast style="margin-top: 50px;"></podcast>
       </div>
-      <div v-for="n in 4" :key="n" style="overflow: hidden;">
-        <left-content style="margin: 50px 30px 0 0;" title="配音" :navItems="['中文配音', '日文及其他', '角色配音', '声优录音', '作品录音']" :chooseItems="[['更多'], ['按小鱼干', '按时间']]"></left-content>
-        <rating style="margin-top: 50px;"></rating>
+      <div v-for="(catalog, index) in catalogs" :key="index" style="overflow: hidden;">
+        <left-content style="margin: 50px 30px 0 0;" :title="catalog.name" :navItems="catalog.leaves"></left-content>
+        <rating :ratingId="Number(catalog.id)" style="margin-top: 50px;"></rating>
       </div>
     </div>
     <ms-footer></ms-footer>
@@ -33,24 +34,28 @@
 import MsHeader from './common/MsHeader'
 import navContent from './navContent/navContent'
 import carousel from './common/carousel'
-import more from './more/more'
-import leftContent from './contentBlock/leftContentBlock'
-import bell from './contentBlock/bell'
-import podcast from './contentBlock/podcast'
-import soundList from './contentBlock/hotSoundList'
-import hotActivity from './contentBlock/hotActivity'
-import square from './contentBlock/square'
-import rating from './contentBlock/rating'
+import channel from './channel/channel'
+import leftContent from './leftContentBlock/leftContentBlock'
+import hotRecommend from './leftContentBlock/hotRecommend'
+import bell from './bell/bell'
+import podcast from './podcast/podcast'
+import soundList from './hotSoundList/hotSoundList'
+import hotActivity from './hotActivity/hotActivity'
+import square from './square/square'
+import rating from './rating/rating'
 import MsFooter from './common/MsFooter'
 import toTop from './common/toTop'
+
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
     MsHeader,
     navContent,
     carousel,
-    more,
+    channel,
     leftContent,
+    hotRecommend,
     bell,
     podcast,
     soundList,
@@ -59,7 +64,21 @@ export default {
     rating,
     MsFooter,
     toTop
-  }
+  },
+  // data () {
+  //   return {
+  //     partitions: []
+  //   }
+  // },
+  mounted () {
+    this.$store.dispatch('catalogInit')
+  },
+  computed: {
+    ...mapGetters([
+      'catalogRings',
+      'catalogs'
+    ])
+  },
 }
 </script>
 
@@ -68,7 +87,7 @@ export default {
   width 80%
   margin 15px auto 0
   overflow auto
-  .carousel-more
+  .carousel-channel
     height 224px
     margin 20px auto
 </style>

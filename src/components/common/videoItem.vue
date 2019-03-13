@@ -1,28 +1,28 @@
 <template>
   <div style="overflow: hidden; display: inline-block;">
     <div class="bigcard-wrapper card-basic" v-if="videoType">
-      <a href="" title="【有声漫】一禅小和尚第五期二喜与大春">
+      <a href="" :title="soundStr">
         <div class="bigcard-img">
-          <img src="//static.missevan.com/coversmini/201811/22/b2125b2837b4bf66e558d5a51d30c87a122952.jpg?x-oss-process=style/webp" alt="">
-          <div class="video-time">2:00</div>
+          <img :src="frontCover" alt="">
+          <div class="video-time">{{ duration | timeFilter }}</div>
         </div>
       </a>
       <div class="video-title">
-        <a href="">【有声漫】一禅小和尚第五期二喜与大春</a>
+        <a href="">{{ soundStr }}</a>
       </div>
       <div class="video-info">
-        <div class="video-info-broadcast">1.2万</div>
-        <div class="video-info-comment">191</div>
+        <div class="video-info-broadcast">{{ viewCount | countFilter }}</div>
+        <div class="video-info-comment">{{ allComments | countFilter }}</div>
       </div>
     </div>
     <div class="smallcard-wrapper card-basic" v-else>
-      <a href="" title="【有声漫】一禅小和尚第五期二喜与大春">
+      <a href="" :title="soundStr">
         <div class="smallcard-img">
-          <img src="//static.missevan.com/coversmini/201811/22/b2125b2837b4bf66e558d5a51d30c87a122952.jpg?x-oss-process=style/webp" alt="">
+          <img :src="frontCover" alt="">
         </div>
       </a>
       <div class="smallcard-video-title">
-        <a href="">【有声漫】一禅小和尚第五期二喜与大春</a>
+        <a href="">{{ soundStr }}</a>
       </div>
     </div>
   </div>
@@ -34,6 +34,50 @@ export default {
     videoType: {
       type: Boolean,
       default: true
+    },
+    viewCount: {
+      type: Number,
+      default: 0
+    },
+    allComments: {
+      type: Number,
+      default: 0
+    },
+    soundStr: {
+      type: String,
+      default: '【有声漫】一禅小和尚第五期二喜与大春'
+    },
+    frontCover: {
+      type: String,
+      default: '//static.missevan.com/coversmini/201811/22/b2125b2837b4bf66e558d5a51d30c87a122952.jpg?x-oss-process=style/webp'
+    },
+    duration: {
+      type: String,
+      default: '0'
+    }
+  },
+  filters: {
+    countFilter (value) {
+      if (value < 10000) {
+        return value
+      } else if (value < 100000) {
+        return (value / 10000).toFixed(1) + '万'
+      } else {
+        return Math.floor(value / 10000) + '万'
+      }
+    },
+    timeFilter (value) {
+      let minuteNumber = Math.floor((value / 1000) / 60)
+      let secondNumber = Math.floor(((value / 1000) / 60 - minuteNumber) * 60)
+      secondNumber = secondNumber >= 10 ? secondNumber : '0' + secondNumber
+      if (minuteNumber < 60) {
+        return minuteNumber + ':' + secondNumber
+      } else {
+        let hourNumber = Math.floor(minuteNumber / 60)
+        minuteNumber = minuteNumber % 60
+        minuteNumber = minuteNumber >= 10 ? minuteNumber : '0' + minuteNumber
+        return hourNumber + ':' + minuteNumber + ':' + secondNumber
+      }
     }
   }
 }

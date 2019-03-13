@@ -22,11 +22,10 @@
 
 <script>
 import link from '@/mock/recommend'
-import { clearInterval } from 'timers';
 export default {
   mounted () {
     this.items = link.links
-    this.count = Object.keys(this.items).length
+    this.count = this.items.length
     this.$refs.carouselWrap.style.width = 440 * this.count + 'px'
     // debugger
     this.startInterval()

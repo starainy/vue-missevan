@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import navItem from '../common/navItem'
+import navItem from './navItem'
 import catalog from '@/mock/catalog'
 
 export default {
