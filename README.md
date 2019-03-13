@@ -144,4 +144,4 @@ rings
 
 # 项目演示
 
-![若图片无法显示请去static下查看](http://xcx2.stabunkow.site/sxy/missevan.gif)
+![若图片无法显示请去static下查看](https://github.com/starainy/vue-missevan/blob/master/static/missevan.gif)
